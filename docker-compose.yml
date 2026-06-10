@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: abono-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: abono
+      POSTGRES_PASSWORD: abono123
+      POSTGRES_DB: abono_el_lago
+    ports:
+      - "5432:5432"
+    volumes:
+      - abono_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  abono_postgres_data:

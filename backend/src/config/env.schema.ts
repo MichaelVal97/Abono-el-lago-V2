@@ -1,0 +1,1 @@
+// Environment validation schema placeholder.
