@@ -19,3 +19,6 @@ frontend/dist
 
 # Backend
 backend/dist
+
+# Local work files
+work/

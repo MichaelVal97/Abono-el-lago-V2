@@ -7,6 +7,7 @@ export function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const googleAuthUrl = `${import.meta.env.VITE_API_URL ?? 'http://localhost:3001/api'}/auth/google`;
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -23,6 +24,12 @@ export function RegisterPage() {
       <section className="auth-card">
         <h1>Crear cuenta</h1>
         <p>Registra tu perfil para comprar y hacer seguimiento de tus pedidos.</p>
+        <a className="google-button" href={googleAuthUrl}>
+          Registrarse con Google
+        </a>
+        <div className="auth-divider">
+          <span>o</span>
+        </div>
         <form onSubmit={onSubmit} className="auth-form">
           <label>
             Nombre

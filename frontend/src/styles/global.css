@@ -38,6 +38,51 @@ a {
   margin: 24px 0;
 }
 
+.auth-divider {
+  display: grid;
+  place-items: center;
+  margin: 16px 0;
+  position: relative;
+}
+
+.auth-divider::before {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 1px;
+  background: #d8e4d4;
+}
+
+.auth-divider span {
+  position: relative;
+  z-index: 1;
+  background: white;
+  padding: 0 12px;
+  color: #6a7f71;
+  font-size: 14px;
+}
+
+.google-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  border: 1px solid #d8e4d4;
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: #fff;
+  color: #183128;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.google-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(24, 49, 40, 0.08);
+}
+
 .auth-form label {
   display: grid;
   gap: 8px;

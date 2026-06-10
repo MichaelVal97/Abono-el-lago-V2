@@ -16,6 +16,8 @@ export function LoginPage() {
     }
   }, [searchParams]);
 
+  const googleAuthUrl = `${import.meta.env.VITE_API_URL ?? 'http://localhost:3001/api'}/auth/google`;
+
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
@@ -31,6 +33,12 @@ export function LoginPage() {
       <section className="auth-card">
         <h1>Iniciar sesión</h1>
         <p>Accede a tu cuenta de Abono El Lago.</p>
+        <a className="google-button" href={googleAuthUrl}>
+          Continuar con Google
+        </a>
+        <div className="auth-divider">
+          <span>o</span>
+        </div>
         <form onSubmit={onSubmit} className="auth-form">
           <label>
             Correo

@@ -4,6 +4,7 @@ import { compare, hash } from 'bcrypt';
 import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { AuthUser } from '../shared/types/auth-user.type';
 @Injectable()
 export class AuthService {
   constructor(
@@ -11,7 +12,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  private signToken(user: { id: string; email: string; role: string }) {
+  private signToken(user: { id: string; email: string; role: 'ADMIN' | 'CUSTOMER' }) {
     return this.jwtService.sign({ sub: user.id, email: user.email, role: user.role });
   }
 
@@ -45,21 +46,7 @@ export class AuthService {
     };
   }
 
-  async validateGoogleUser(profile: { email: string; name: string; googleId: string; avatarUrl?: string }) {
-    const existing = await this.usersService.findByEmail(profile.email);
-    if (existing) {
-      return existing;
-    }
-
-    return this.usersService.create({
-      name: profile.name,
-      email: profile.email,
-      googleId: profile.googleId,
-      avatarUrl: profile.avatarUrl,
-    });
-  }
-
-  async googleLogin(user: { id: string; email: string; role: string }) {
+  async googleLogin(user: AuthUser & { name?: string; avatarUrl?: string | null }) {
     return {
       user,
       accessToken: this.signToken(user),

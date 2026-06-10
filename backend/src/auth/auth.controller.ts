@@ -6,6 +6,7 @@ import { JwtAuthGuard } from '../shared/guards/jwt-auth.guard';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { environment } from '../config/environment';
+import { AuthUser } from '../shared/types/auth-user.type';
 
 @Controller('auth')
 export class AuthController {
@@ -30,7 +31,7 @@ export class AuthController {
   @Get('google/callback')
   @UseGuards(AuthGuard('google'))
   async googleCallback(
-    @Req() req: { user: { id: string; email: string; role: string } },
+    @Req() req: { user: AuthUser & { name?: string; avatarUrl?: string | null } },
     @Res() res: Response,
   ) {
     const result = await this.authService.googleLogin(req.user);
